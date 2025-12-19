@@ -107,8 +107,9 @@ static int resolve_card(int card, int row_to_take, int table[NUM_ROWS][ROW_SIZE]
 
     if (!can_place) {
         // Must take a row - use the specified row_to_take
+        int penalty = compute_row_penalty(table[row_to_take]);
         take_row(card, row_to_take, table);
-        return compute_row_penalty(table[row_to_take]);
+        return penalty;
     }
 
     // Find row with smallest positive diff (card > end_card)
@@ -129,8 +130,9 @@ static int resolve_card(int card, int row_to_take, int table[NUM_ROWS][ROW_SIZE]
 
     if (num_cards == ROW_SIZE) {
         // Row is full, take it
+        int penalty = compute_row_penalty(table[best_row]);
         take_row(card, best_row, table);
-        return compute_row_penalty(table[best_row]);
+        return penalty;
     }
 
     // Place card
