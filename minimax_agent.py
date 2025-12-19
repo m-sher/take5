@@ -57,7 +57,7 @@ def _take_row(card: int, row_to_take: int, table: np.ndarray) -> tuple[int, np.n
 def _best_row_choices(table: np.ndarray) -> np.ndarray:
     """Return rows ordered from lowest to highest penalty."""
     penalties = np.asarray([_compute_row_penalty(row) for row in table], dtype=np.int64)
-    return np.argsort(penalties)
+    return np.argsort(penalties, kind='stable')
 
 
 @dataclass(frozen=True)
